@@ -1,43 +1,28 @@
-import React from "react";
-import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
+import {useState} from "react";
 
 function App() {
- 
-  return (<BrowserRouter>
-  <button>
-    <Link to="/home">Home</Link>
-  </button>
-  <button>
-    <Link to="/">Index</Link>
-  </button>
-  <Routes>
-    <Route path="/" element={<Index/>}/>
-    <Route path="/home" element={<Home/>}/>
-  </Routes>
-  </BrowserRouter>)
-}
+  const [click1, toggle1]=useToggle(false);
+  const [click2, toggle2]=useToggle(false);
+  const [click3, toggle3]=useToggle(false);
+  const [click4, toggle4]=useToggle(false);
+  const [click5, toggle5]=useToggle(false);
 
-function Index() {
-  var navigate = useNavigate();
-  function handleClick() {
-    navigate('/home')
-    
-  }
+
   return(
-    <>
-    <h2>Index</h2>
-    <button onClick={handleClick}>Go home</button>
-    </>
+   <>
+    <button onClick={toggle1}>{click1  ? 'hello ' : 'bye'}</button>
+    <button onClick={toggle2}>{click2  ? 'hello ' : 'bye'}</button>
+    <button onClick={toggle3}>{click3  ? 'hello ' : 'bye'}</button>
+    <button onClick={toggle4}>{click4  ? 'hello ' : 'bye'}</button>
+    <button onClick={toggle5}>{click5  ? 'hello ' : 'bye'}</button>
+   </>
   )
 }
 
-function Home() {
-  return(
-    <>
-    <h2>Index</h2>
-    <p>This is home</p>
-    </>
-  )
-}
+const useToggle = (initialState = false) => {
+  const [state, setState] = useState(initialState);
+  const toggle = () => setState((state) => !state);
+  return [state, toggle];
+};
 
 export default App;
