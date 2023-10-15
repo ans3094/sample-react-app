@@ -1,22 +1,43 @@
-import React,{ useState, useEffect} from "react";
+import React from "react";
+import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
+ 
+  return (<BrowserRouter>
+  <button>
+    <Link to="/home">Home</Link>
+  </button>
+  <button>
+    <Link to="/">Index</Link>
+  </button>
+  <Routes>
+    <Route path="/" element={<Index/>}/>
+    <Route path="/home" element={<Home/>}/>
+  </Routes>
+  </BrowserRouter>)
+}
 
-  useEffect(
-    ()=>{
-    console.log('useEffect');
-    document.title =`you click ${count} times`;
-  })
-
+function Index() {
+  var navigate = useNavigate();
+  function handleClick() {
+    navigate('/home')
+    
+  }
   return(
     <>
-      <p>you click &{count} times</p>
-      <button onClick={()=>{
-        console.log('click');
-        setCount(count+1)
-      }}>CLICK</button>
+    <h2>Index</h2>
+    <button onClick={handleClick}>Go home</button>
     </>
   )
 }
+
+function Home() {
+  return(
+    <>
+    <h2>Index</h2>
+    <p>This is home</p>
+    </>
+  )
+}
+
 export default App;
